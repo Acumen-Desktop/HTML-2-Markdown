@@ -1,12 +1,13 @@
 {
-	"name": "my-new-app",
-	"productName": "my-new-app",
+	"name": "html-to-markdown-converter",
+	"productName": "HTML to Markdown Converter",
 	"version": "1.0.0",
-	"description": "My Electron application description",
+	"description": "A desktop application for converting HTML content to Markdown format with Monaco editor integration",
 	"main": ".vite/build/main/main.js",
 	"type": "module",
 	"scripts": {
 		"start": "electron-forge start",
+		"dev": "electron-forge start",
 		"package": "electron-forge package",
 		"make": "electron-forge make",
 		"publish": "electron-forge publish",
