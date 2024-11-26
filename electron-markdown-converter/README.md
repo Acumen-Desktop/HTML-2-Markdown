@@ -8,15 +8,29 @@ Template project with ***V***ite, ***T***ypescript, ***E***lectron Forge, ***S**
 
 ![](readme001.png)
 
-```
-git clone https://github.com/codec-xyz/vtest MyAwesomeApp
+```bash
+# Clone the repository
+git clone https://github.com/Acumen-Desktop/HTML-2-Markdown.git
 
-cd MyAwesomeApp
+cd HTML-2-Markdown
 
+# Using npm
 npm install
-
 npm run start
+
+# Or using pnpm
+pnpm install
+pnpm start
 ```
+
+## Package Manager Support
+
+This project supports both npm and pnpm as package managers. Choose the one you're most comfortable with:
+
+- **npm**: The default Node.js package manager
+- **pnpm**: A fast, disk space efficient package manager
+
+Both package managers will work identically for this project, providing the same development experience.
 
 > [!Note]
 >
