@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     import loader from '@monaco-editor/loader';
-    import TurnDown from 'turndown';
+    import { convertHtmlToMarkdown } from '../lib/converter';
 
     let urlInput: string = '';
     let selectorInput: string = '';
@@ -55,21 +55,15 @@
             const response = await fetch(urlInput);
             const html = await response.text();
             
-            // Use TurnDown for conversion
-            const turndownService = new TurnDown({
-                headingStyle: 'atx',
-                codeBlockStyle: 'fenced'
-            });
+            const options = {
+                selector: selectorInput || undefined,
+                preserveLinks: true,
+                preserveImages: true,
+                preserveEmphasis: true,
+                preserveTables: true
+            };
 
-            let content = html;
-            if (selectorInput) {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const selected = doc.querySelector(selectorInput);
-                content = selected ? selected.outerHTML : html;
-            }
-
-            const markdown = turndownService.turndown(content);
+            const markdown = await convertHtmlToMarkdown(html, options);
             editor.setValue(markdown);
             canExport = true;
         } catch (error) {
