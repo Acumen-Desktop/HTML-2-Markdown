@@ -1,8 +1,9 @@
 import os
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_file
 from converter import convert_html_to_markdown
 import trafilatura
 from urllib.parse import urlparse
+from io import BytesIO
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY") or "dev_key_123"
@@ -34,5 +35,25 @@ def convert():
         markdown_content = convert_html_to_markdown(downloaded, selector)
         return jsonify({'markdown': markdown_content})
 
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+@app.route('/export', methods=['POST'])
+def export():
+    try:
+        markdown_content = request.form.get('markdown')
+        if not markdown_content:
+            return jsonify({'error': 'No content to export'}), 400
+
+        # Create BytesIO object with markdown content
+        buffer = BytesIO()
+        buffer.write(markdown_content.encode('utf-8'))
+        buffer.seek(0)
+
+        return send_file(
+            buffer,
+            mimetype='text/markdown',
+            as_attachment=True,
+            download_name='converted.md'
+        )
     except Exception as e:
         return jsonify({'error': str(e)}), 500

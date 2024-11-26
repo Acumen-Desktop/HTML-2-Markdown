@@ -18,10 +18,12 @@ require(['vs/editor/editor.main'], function() {
     });
 });
 
+const convertBtn = document.getElementById('convertBtn');
+const exportBtn = document.getElementById('exportBtn');
+
 document.getElementById('convertBtn').addEventListener('click', async () => {
     const url = document.getElementById('urlInput').value;
     const selector = document.getElementById('selectorInput').value;
-    const convertBtn = document.getElementById('convertBtn');
 
     if (!url) {
         alert('Please enter a URL');
@@ -44,13 +46,48 @@ document.getElementById('convertBtn').addEventListener('click', async () => {
 
         if (response.ok) {
             editor.setValue(data.markdown);
+            exportBtn.disabled = false;
         } else {
             alert(data.error || 'Conversion failed');
+            exportBtn.disabled = true;
         }
     } catch (error) {
         alert('An error occurred during conversion');
     } finally {
         convertBtn.disabled = false;
+
+document.getElementById('exportBtn').addEventListener('click', async () => {
+    const markdown = editor.getValue();
+    
+    if (!markdown || markdown === '# Converted Markdown will appear here') {
+        alert('No content to export');
+        return;
+    }
+
+    try {
+        exportBtn.disabled = true;
+        exportBtn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Exporting...';
+
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/export';
+
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'markdown';
+        input.value = markdown;
+
+        form.appendChild(input);
+        document.body.appendChild(form);
+        form.submit();
+        document.body.removeChild(form);
+    } catch (error) {
+        alert('An error occurred during export');
+    } finally {
+        exportBtn.disabled = false;
+        exportBtn.innerHTML = 'Export Markdown';
+    }
+});
         convertBtn.innerHTML = 'Convert';
     }
 });
