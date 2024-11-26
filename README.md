@@ -1,6 +1,9 @@
 # HTML to Markdown Converter
 
-A versatile HTML to Markdown converter application available in both web and desktop versions. This tool helps you easily convert HTML content to Markdown format with real-time preview functionality.
+A versatile HTML to Markdown converter application available in both web and desktop versions. This tool helps you easily convert HTML content to Markdown format with real-time preview functionality. It supports direct URL input, CSS selector targeting, and provides both online (Flask) and offline (Electron) implementations.
+
+[![GitHub](https://img.shields.io/github/license/Acumen-Desktop/HTML-2-Markdown)](https://github.com/Acumen-Desktop/HTML-2-Markdown/blob/main/LICENSE)
+[![Electron](https://img.shields.io/badge/Electron-20.x-blue.svg)](https://www.electronjs.org/)
 
 ## Features
 
@@ -97,6 +100,19 @@ The project uses modern web technologies and follows best practices for both web
 - Modular architecture
 - Real-time preview
 - Error handling
+### Configuration
+
+#### Web Version
+- Default port: 5000
+- Rate limiting: 1 request per second
+- Supported formats: HTML, URLs
+- Export format: Markdown (.md)
+
+#### Desktop Version
+- Cross-platform support (Windows, macOS, Linux)
+- No rate limiting for local conversions
+- Offline-first architecture
+- System-native window controls
 - Rate limiting for web scraping
 - Responsive design
 - Theme support
