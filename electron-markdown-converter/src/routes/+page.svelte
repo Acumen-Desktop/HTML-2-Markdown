@@ -6,7 +6,7 @@
     let urlInput: string = '';
     let selectorInput: string = '';
     let editor: any;
-    let isDarkTheme = true;
+    let isDarkTheme = true; // Default to dark theme
     let isConverting = false;
     let canExport = false;
 
