@@ -16,6 +16,11 @@ DEFAULT_HEADERS = {
     'DNT': '1',
 }
 
+# Configure trafilatura settings
+import trafilatura.settings
+config = trafilatura.settings.use_config()
+config.set('DEFAULT', 'USER_AGENT', DEFAULT_HEADERS['User-Agent'])
+
 # Rate limiting settings
 RATE_LIMIT_DELAY = 1  # seconds between requests
 last_request_time = 0
@@ -63,7 +68,7 @@ def convert():
 
         # First attempt: Try with trafilatura and custom headers
         try:
-            downloaded = trafilatura.fetch_url(url, config={'DEFAULT': {'USER_AGENT': DEFAULT_HEADERS['User-Agent']}})
+            downloaded = trafilatura.fetch_url(url)
             
             if not downloaded:
                 logger.warning(f"Failed to fetch URL with trafilatura: {url}")
@@ -122,6 +127,7 @@ def convert():
     except Exception as e:
         logger.error(f"Unexpected error in convert route: {str(e)}")
         return jsonify({'error': str(e)}), 500
+
 @app.route('/export', methods=['POST'])
 def export():
     try:
