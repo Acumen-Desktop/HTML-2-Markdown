@@ -55,6 +55,9 @@ document.getElementById('convertBtn').addEventListener('click', async () => {
         alert('An error occurred during conversion');
     } finally {
         convertBtn.disabled = false;
+        convertBtn.innerHTML = 'Convert';
+    }
+});
 
 document.getElementById('exportBtn').addEventListener('click', async () => {
     const markdown = editor.getValue();
@@ -86,8 +89,5 @@ document.getElementById('exportBtn').addEventListener('click', async () => {
     } finally {
         exportBtn.disabled = false;
         exportBtn.innerHTML = 'Export Markdown';
-    }
-});
-        convertBtn.innerHTML = 'Convert';
     }
 });
