@@ -69,6 +69,20 @@ npm run dev   # or pnpm dev
 - Node.js 20+
 - npm or pnpm
 
+### Required Dependencies
+#### Python Packages
+- Flask 3.1.x
+- BeautifulSoup4
+- Trafilatura
+- html2text
+- requests
+
+#### Node Packages
+- electron 33.x
+- monaco-editor
+- tailwindcss
+- svelte 5.x
+
 ### Project Structure
 ```
 ├── app.py              # Flask application core
