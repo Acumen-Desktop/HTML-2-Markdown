@@ -6,11 +6,14 @@
     let urlInput: string = '';
     let selectorInput: string = '';
     let editor: any;
-    let isDarkTheme = false;
+    let isDarkTheme = true;
     let isConverting = false;
     let canExport = false;
 
     onMount(async () => {
+        // Set initial dark mode
+        document.body.classList.add('dark');
+        
         // Initialize Monaco Editor
         loader.config({ paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs' } });
         const monaco = await loader.init();
@@ -95,16 +98,9 @@
 
 <div class="container mx-auto px-4 py-8">
     <nav class="flex items-center justify-between mb-8">
-        <h1 class="text-2xl font-bold">HTML to Markdown Converter</h1>
-        <button 
-            on:click={toggleTheme}
-            class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
-        >
-            {#if isDarkTheme}
-                🌞
-            {:else}
-                🌙
-            {/if}
+        <h1 class="text-2xl font-bold dark:text-white">HTML to Markdown Converter</h1>
+        <button on:click={toggleTheme} class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800">
+            <i class={isDarkTheme ? "fas fa-sun" : "fas fa-moon"}></i>
         </button>
     </nav>
 
